@@ -112,6 +112,9 @@ export const useStore = create<Store>()((...a)=>({
 * The Immer middleware enables you to use immutable state in a more convenient way.
 * Also, with Immer, you can simplify handling immutable data structures in Zustand.
 
+```sh
+npm install immer 
+```
 
 ```bash
 ├── component
