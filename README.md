@@ -153,7 +153,6 @@ in app/fax/lisa/store/slicer/createCounter.tsx
 ```sh
     import { type StateCreator } from "zustand"
     import { type CounterSlice } from "../type/counterType"
-    import {immer} from "zustand/middleware/immer"
 
     export const CreateCounter:StateCreator<CounterSlice,[["zustand/immer",never]],[],CounterSlice> =(set)=>({
         inc() {
