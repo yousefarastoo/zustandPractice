@@ -39,7 +39,7 @@ export type CounterSlice = CounterAction & CounterState;
 
 ```
 
-# in app/fax/lisa/store/slicer/createCounter.tsx
+in app/fax/lisa/store/slicer/createCounter.tsx
 
 ```sh
     import { StateCreator } from "zustand"
@@ -65,7 +65,7 @@ export type CounterSlice = CounterAction & CounterState;
 
 ```
 
-# in app/fax/lisa/store/type/counterType
+in app/fax/lisa/store/type/counterType
 
 ```sh
 import { create } from "zustand";
@@ -84,7 +84,7 @@ export type CounterSlice = CounterAction & CounterState;
 
 ```
 
-# in app/fax/lisa/store/type/storeType
+in app/fax/lisa/store/type/storeType
 
 ```sh
 
@@ -92,7 +92,7 @@ import {type CounterSlice} from "../type/counterType"
 export type Store = CounterSlice & UserSlicer
 ```
 
-# in app/fax/lisa/store/store.tsx
+in app/fax/lisa/store/store.tsx
 
 ```sh
 import {create} from "zustand"
@@ -104,16 +104,96 @@ export const useStore = create<Store>()((...a)=>({
 }))
 
 ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
-   app/fax/lisa/store/type/store
+first define type state and action for counter  :
+in app/fax/lisa/store/type/CounterType : 
+
+```sh
+
+import { create } from "zustand";
+import { type StateCreator } from "zustand";
+
+type CounterState = {
+    counter:number
+}
+
+type CounterAction = {
+    inc:()=>void,
+    reset:()=>void,
+    dec:()=>void,
+    incNumberPluse:(number:number)=>void
+}
+
+
+export type CounterSlice = CounterAction & CounterState;
+
+```
+
+in app/fax/lisa/store/slicer/createCounter.tsx
+
+```sh
+    import { StateCreator } from "zustand"
+    import { CounterSlice } from "../type/counterType"
+
+
+    export const CreateCounter:StateCreator<CounterSlice,[],[],CounterSlice> =(set)=>({
+        inc() {
+            set(state=>({...state,counter:state.counter+1}))
+        },
+        dec() {
+            set(state=>({...state,counter:state.counter-1}))
+        },
+        reset() {
+            set(state=>({...state,counter:0}))
+        },
+        incNumberPluse(number) {
+            set(state=>({...state,counter:state.counter+number}))
+
+        },
+        counter:0,
+    }) 
+
+```
+
+in app/fax/lisa/store/type/counterType
+
+```sh
+import { create } from "zustand";
+import { type StateCreator } from "zustand";
+type CounterState = {
+    counter:number
+}
+type CounterAction = {
+    inc:()=>void,
+    reset:()=>void,
+    dec:()=>void,
+    incNumberPluse:(number:number)=>void
+}
+
+export type CounterSlice = CounterAction & CounterState;
+
+```
+
+in app/fax/lisa/store/type/storeType
+
+```sh
+
+import {type CounterSlice} from "../type/counterType"
+export type Store = CounterSlice & UserSlicer
+```
+
+in app/fax/lisa/store/store.tsx
+
+```sh
+import {create} from "zustand"
+import {Store} from "./type/storeType"
+import { CreateCounter } from "./slicer/createCounter"
+
+export const useStore = create<Store>()((...a)=>({
+    ...CreateCounter(...a),
+}))
+
+```
+app/fax/lisa/store/type/store
 ```sh
 import {create} from "zustand"
 import {Store} from "./type/storeType"
@@ -127,19 +207,32 @@ export const useStore = create<Store>()((...a)=>({
     ...userCreator(...a)
 }))
 ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# Immer middleware
+
+* The Immer middleware enables you to use immutable state in a more convenient way.
+* Also, with Immer, you can simplify handling immutable data structures in Zustand.
 
 
+```sh
+npm install immer
+ ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+```bash
+├── component
+│   └── component.tsx
+├── page.tsx
+├── store
+│   ├── slicer
+│   │   ├── createCounter.tsx
+│   │   └── createUser.tsx
+│   ├── store.tsx
+│   └── type
+│       ├── counterType.ts
+│       ├── storeType.ts
+│       └── userType.ts
+└── store.ts
+```
 
 
 <!-- ROADMAP -->
