@@ -128,8 +128,8 @@ export const useStore = create<Store>()((...a)=>({
 │       └── userType.ts
 └── store.ts
 ```
-first define type state and action for counter  :
-in app/fax/lisa/store/type/CounterType : 
+* first define type state and action for counter
+* in app/fax/lisa/store/type/CounterType : 
 
 ```sh
 
