@@ -139,27 +139,28 @@ _Below is an example of how you can instruct your audience on installing and set
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   import { StateCreator } from "zustand"
-import { CounterSlice } from "../type/counterType"
+       import { StateCreator } from "zustand"
+    import { CounterSlice } from "../type/counterType"
 
 
-export const CreateCounter:StateCreator<CounterSlice,[],[],CounterSlice> =(set)=>({
-    inc() {
-        set(state=>({...state,counter:state.counter+1}))
-    },
-    dec() {
-        set(state=>({...state,counter:state.counter-1}))
-    },
-    reset() {
-        set(state=>({...state,counter:0}))
-    },
-    incNumberPluse(number) {
-        set(state=>({...state,counter:state.counter+number}))
+    export const CreateCounter:StateCreator<CounterSlice,[],[],CounterSlice> =(set)=>({
+        inc() {
+            set(state=>({...state,counter:state.counter+1}))
+        },
+        dec() {
+            set(state=>({...state,counter:state.counter-1}))
+        },
+        reset() {
+            set(state=>({...state,counter:0}))
+        },
+        incNumberPluse(number) {
+            set(state=>({...state,counter:state.counter+number}))
 
-    },
-    counter:0,
-}) 
-```
+        },
+        counter:0,
+    }) 
+
+   ```
 4. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
