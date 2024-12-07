@@ -148,7 +148,32 @@ This is an example of how to list things you need to use the software and how to
 │       └── userType.ts
 └── store.ts
 ```
+first define type state and action for counter  :
+in app/fax/lisa/store/type/CounterType : 
+```sh
+
+import { create } from "zustand";
+import { type StateCreator } from "zustand";
+
+type CounterState = {
+    counter:number
+}
+
+type CounterAction = {
+    inc:()=>void,
+    reset:()=>void,
+    dec:()=>void,
+    incNumberPluse:(number:number)=>void
+}
+
+
+export type CounterSlice = CounterAction & CounterState;
+
+```
+
    ```sh
+in app/fax/lisa/store/slicer/createCounter.tsx
+
     import { StateCreator } from "zustand"
     import { CounterSlice } from "../type/counterType"
 
@@ -171,7 +196,7 @@ This is an example of how to list things you need to use the software and how to
     }) 
 
    ```
-in app/fax/lisa/store/type/CounterType : 
+# in app/fax/lisa/store/type/counterType
 ```sh
 
 import { create } from "zustand";
@@ -188,17 +213,24 @@ type CounterAction = {
     incNumberPluse:(number:number)=>void
 }
 
-
 export type CounterSlice = CounterAction & CounterState;
 
-
-
 ```
-in app/fax/lisa/store/type/storeType
+# in app/fax/lisa/store/type/storeType
 ```sh
 
 import {type CounterSlice} from "../type/counterType"
 export type Store = CounterSlice & UserSlicer
+```
+# in app/fax/lisa/store/store.tsx
+```sh
+import {create} from "zustand"
+import {Store} from "./type/storeType"
+import { CreateCounter } from "./slicer/createCounter"
+
+export const useStore = create<Store>()((...a)=>({
+    ...CreateCounter(...a),
+}))
 ```
 4. Enter your API in `config.js`
    ```js
