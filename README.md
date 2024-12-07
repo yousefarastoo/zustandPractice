@@ -139,7 +139,7 @@ _Below is an example of how you can instruct your audience on installing and set
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-       import { StateCreator } from "zustand"
+    import { StateCreator } from "zustand"
     import { CounterSlice } from "../type/counterType"
 
 
