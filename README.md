@@ -39,11 +39,32 @@ export type CounterSlice = CounterAction & CounterState;
 
 ```
 
+in app/fax/lisa/store/type/counterType
+
+```sh
+import { create } from "zustand";
+import { type StateCreator } from "zustand";
+type CounterState = {
+    counter:number
+}
+type CounterAction = {
+    inc:()=>void,
+    reset:()=>void,
+    dec:()=>void,
+    incNumberPluse:(number:number)=>void
+}
+
+export type CounterSlice = CounterAction & CounterState;
+
+```
+
+
+
 in app/fax/lisa/store/slicer/createCounter.tsx
 
 ```sh
-    import { StateCreator } from "zustand"
-    import { CounterSlice } from "../type/counterType"
+    import { type StateCreator } from "zustand"
+    import { type CounterSlice } from "../type/counterType"
 
 
     export const CreateCounter:StateCreator<CounterSlice,[],[],CounterSlice> =(set)=>({
@@ -65,31 +86,12 @@ in app/fax/lisa/store/slicer/createCounter.tsx
 
 ```
 
-in app/fax/lisa/store/type/counterType
-
-```sh
-import { create } from "zustand";
-import { type StateCreator } from "zustand";
-type CounterState = {
-    counter:number
-}
-type CounterAction = {
-    inc:()=>void,
-    reset:()=>void,
-    dec:()=>void,
-    incNumberPluse:(number:number)=>void
-}
-
-export type CounterSlice = CounterAction & CounterState;
-
-```
-
 in app/fax/lisa/store/type/storeType
 
 ```sh
 
 import {type CounterSlice} from "../type/counterType"
-export type Store = CounterSlice & UserSlicer
+export type Store = CounterSlice
 ```
 
 in app/fax/lisa/store/store.tsx
@@ -103,6 +105,34 @@ export const useStore = create<Store>()((...a)=>({
     ...CreateCounter(...a),
 }))
 
+```
+===============================================================
+
+
+# Immer middleware
+
+* The Immer middleware enables you to use immutable state in a more convenient way.
+* Also, with Immer, you can simplify handling immutable data structures in Zustand.
+
+
+```sh
+npm install immer
+ ```
+
+```bash
+├── component
+│   └── component.tsx
+├── page.tsx
+├── store
+│   ├── slicer
+│   │   ├── createCounter.tsx
+│   │   └── createUser.tsx
+│   ├── store.tsx
+│   └── type
+│       ├── counterType.ts
+│       ├── storeType.ts
+│       └── userType.ts
+└── store.ts
 ```
 first define type state and action for counter  :
 in app/fax/lisa/store/type/CounterType : 
@@ -193,6 +223,7 @@ export const useStore = create<Store>()((...a)=>({
 }))
 
 ```
+
 app/fax/lisa/store/type/store
 ```sh
 import {create} from "zustand"
@@ -206,32 +237,6 @@ export const useStore = create<Store>()((...a)=>({
     ...CreateCounter(...a),
     ...userCreator(...a)
 }))
-```
-
-# Immer middleware
-
-* The Immer middleware enables you to use immutable state in a more convenient way.
-* Also, with Immer, you can simplify handling immutable data structures in Zustand.
-
-
-```sh
-npm install immer
- ```
-
-```bash
-├── component
-│   └── component.tsx
-├── page.tsx
-├── store
-│   ├── slicer
-│   │   ├── createCounter.tsx
-│   │   └── createUser.tsx
-│   ├── store.tsx
-│   └── type
-│       ├── counterType.ts
-│       ├── storeType.ts
-│       └── userType.ts
-└── store.ts
 ```
 
 
