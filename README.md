@@ -171,6 +171,35 @@ This is an example of how to list things you need to use the software and how to
     }) 
 
    ```
+in app/fax/lisa/store/type/CounterType : 
+```sh
+
+import { create } from "zustand";
+import { type StateCreator } from "zustand";
+
+type CounterState = {
+    counter:number
+}
+
+type CounterAction = {
+    inc:()=>void,
+    reset:()=>void,
+    dec:()=>void,
+    incNumberPluse:(number:number)=>void
+}
+
+
+export type CounterSlice = CounterAction & CounterState;
+
+
+
+```
+in app/fax/lisa/store/type/storeType
+```sh
+
+import {type CounterSlice} from "../type/counterType"
+export type Store = CounterSlice & UserSlicer
+```
 4. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
@@ -180,7 +209,20 @@ This is an example of how to list things you need to use the software and how to
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+   app/fax/lisa/store/type/store
+```sh
+import {create} from "zustand"
+import {Store} from "./type/storeType"
+import { CreateCounter } from "./slicer/createCounter"
+import {userCreator} from "./slicer/createUser"
 
+
+
+export const useStore = create<Store>()((...a)=>({
+    ...CreateCounter(...a),
+    ...userCreator(...a)
+}))
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
