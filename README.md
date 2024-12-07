@@ -1,5 +1,5 @@
 # zustandPractice
-```vscode
+```bash
 ├── component
 │   └── component.tsx
 ├── page.tsx
