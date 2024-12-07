@@ -113,10 +113,6 @@ export const useStore = create<Store>()((...a)=>({
 * Also, with Immer, you can simplify handling immutable data structures in Zustand.
 
 
-```sh
-npm install immer
- ```
-
 ```bash
 ├── component
 │   └── component.tsx
@@ -209,7 +205,7 @@ in app/fax/lisa/store/type/storeType
 ```sh
 
 import {type CounterSlice} from "../type/counterType"
-export type Store = CounterSlice & UserSlicer
+export type Store = CounterSlice
 ```
 
 in app/fax/lisa/store/store.tsx
@@ -227,18 +223,3 @@ export const useStore = create<Store>()(immer(
 ))
 
 ```
-
-app/fax/lisa/store/type/store
-```sh
-import {create} from "zustand"
-import {Store} from "./type/storeType"
-import { CreateCounter } from "./slicer/createCounter"
-import {userCreator} from "./slicer/createUser"
-
-
-
-export const useStore = create<Store>()((...a)=>({
-    ...CreateCounter(...a),
-}))
-```
-
