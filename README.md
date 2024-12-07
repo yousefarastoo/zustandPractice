@@ -132,10 +132,6 @@ first define type state and action for counter
 in app/fax/lisa/store/type/CounterType : 
 
 ```sh
-
-import { create } from "zustand";
-import { type StateCreator } from "zustand";
-
 type CounterState = {
     counter:number
 }
@@ -147,25 +143,6 @@ type CounterAction = {
     incNumberPluse:(number:number)=>void
 }
 
-
-export type CounterSlice = CounterAction & CounterState;
-
-```
-
-in app/fax/lisa/store/type/counterType
-
-```sh
-import { create } from "zustand";
-import { type StateCreator } from "zustand";
-type CounterState = {
-    counter:number
-}
-type CounterAction = {
-    inc:()=>void,
-    reset:()=>void,
-    dec:()=>void,
-    incNumberPluse:(number:number)=>void
-}
 
 export type CounterSlice = CounterAction & CounterState;
 
