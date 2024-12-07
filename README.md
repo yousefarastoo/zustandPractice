@@ -133,6 +133,7 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
+```vscode
 ├── component
 │   └── component.tsx
 ├── page.tsx
@@ -146,6 +147,7 @@ This is an example of how to list things you need to use the software and how to
 │       ├── storeType.ts
 │       └── userType.ts
 └── store.ts
+```
    ```sh
     import { StateCreator } from "zustand"
     import { CounterSlice } from "../type/counterType"
